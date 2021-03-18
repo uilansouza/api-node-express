@@ -1,0 +1,21 @@
+version: '3.3'
+volumes:
+  data:
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=39411434
+      - MYSQL_DATABASE=agenda_petshop
+  app:
+      image: phpmyadmin/phpmyadmin:latest
+      links:
+        - db
+      ports:
+        - 80:80
+      environment:
+        - PMA_ARBITRARY=1
