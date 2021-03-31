@@ -33,9 +33,13 @@ module.exports = app =>{
         Atendimento.buscaPorId(id, res)
         
     })
-    app.post('/atendimentos', (req, res)=> {
+    app.post('/atendimentos', (req, res) => {
         const atendimento = req.body
-        Atendimento.adiciona(atendimento, res)
+        Atendimento.adiciona(atendimento)
+        .then(atendmentoCadastrado =>
+            res.status(201).json(atendmentoCadastrado)
+        )
+        .catch(erros => res.status(400).json(erros))
         
     })
     
